@@ -1,0 +1,50 @@
+baseURL = "http://127.0.0.1:1313"
+languageCode = "zh-cn"
+title = "Yrzs's blog"
+theme = "github-style"
+googleAnalytics = ""
+pygmentsCodeFences = true
+pygmentsUseClasses = true
+
+[params]
+author = "Yrzs"
+description = "In solitude, where we are least alone."
+github = "yrzs"
+facebook = "yrzs"
+twitter = "yrzs"
+linkedin = "yrzs"
+instagram = "yrzs"
+tumblr = "yrzs"
+email = "yrzs.zc@qq.com"
+url = "http://127.0.0.1:1313"
+keywords = "blog, google analytics"
+rss = true
+lastmod = true
+userStatusEmoji = "😀"
+favicon = "/images/github.png"
+location = "China"
+enableGitalk = true
+
+[params.gitalk]
+clientID = ""
+clientSecret = ""
+repo = "repo"
+owner = ""
+admin = ""
+id = "location.pathname"
+labels = "gitalk"
+perPage = 15
+pagerDirection = "last"
+createIssueManually = true
+distractionFreeMode = false
+
+[[params.links]]
+title = "Link"
+href = "https://github.com/yrzs"
+[[params.links]]
+title = "Link2"
+href = "http://127.0.0.1:1313"
+icon = "http://127.0.0.1:1313/images/avatar.png"
+
+[frontmatter]
+lastmod = ["lastmod", ":fileModTime", ":default"]
