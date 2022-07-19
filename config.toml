@@ -1,4 +1,4 @@
-baseURL = "http://127.0.0.1:1313"
+baseURL = "http://www.yrzs.tk"
 languageCode = "zh-cn"
 title = "Yrzs's blog"
 theme = "github-style"
@@ -16,7 +16,7 @@ linkedin = "yrzs"
 instagram = "yrzs"
 tumblr = "yrzs"
 email = "yrzs.zc@qq.com"
-url = "http://127.0.0.1:1313"
+url = "http://www.yrzs.tk"
 keywords = "blog, google analytics"
 rss = true
 lastmod = true
@@ -43,8 +43,8 @@ title = "Link"
 href = "https://github.com/yrzs"
 [[params.links]]
 title = "Link2"
-href = "http://127.0.0.1:1313"
-icon = "http://127.0.0.1:1313/images/avatar.png"
+href = "http://www.yrzs.tk"
+icon = "http://www.yrzs.tk/images/avatar.png"
 
 [frontmatter]
 lastmod = ["lastmod", ":fileModTime", ":default"]
