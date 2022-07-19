@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Yrzs&#39;s blog</title>
-    <link>http://www.yrzs.tk/post/</link>
+    <link>https://yrzs.github.io/post/</link>
     <description>Recent content in Posts on Yrzs&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 17 Jul 2022 14:44:41 +0800</lastBuildDate><atom:link href="http://www.yrzs.tk/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 Jul 2022 14:44:41 +0800</lastBuildDate><atom:link href="https://yrzs.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>MyISAM Index</title>
-      <link>http://www.yrzs.tk/post/2022/7/17/myisam/</link>
+      <link>https://yrzs.github.io/post/2022/7/17/myisam/</link>
       <pubDate>Sun, 17 Jul 2022 14:44:41 +0800</pubDate>
       
-      <guid>http://www.yrzs.tk/post/2022/7/17/myisam/</guid>
+      <guid>https://yrzs.github.io/post/2022/7/17/myisam/</guid>
       <description>InnoDB中索引即是数据，也就是 聚簇索引 的 B+Tree 的叶子节点已经把所有完整的用户记录都包含了。
 MyISAM的索引方案虽然也使用树形结构，但是却将索引和数据分开存储：
 将表中的记录按照记录的插入顺序单独存储在一个文件中，称之为 数据文件 这个文件并不划分为若干个 数据页,有多少记录就往这个文件中塞多少记录，通过行号快速访问到某一条记录。MyISAM 记录也需要记录头信息来存储一些额外数据，由于在插入数据的时候并没有刻意按照主键大小排序，所以我们并不能在这些数据上使用二分法进行查找。
@@ -23,10 +23,10 @@ MyISAM的索引方案虽然也使用树形结构，但是却将索引和数据�
     
     <item>
       <title>Innodb Index</title>
-      <link>http://www.yrzs.tk/post/2022/7/14/innodb-index/</link>
+      <link>https://yrzs.github.io/post/2022/7/14/innodb-index/</link>
       <pubDate>Thu, 14 Jul 2022 11:54:52 +0800</pubDate>
       
-      <guid>http://www.yrzs.tk/post/2022/7/14/innodb-index/</guid>
+      <guid>https://yrzs.github.io/post/2022/7/14/innodb-index/</guid>
       <description>之前的 简单索引方案 假设所有的目录项都可以在物理存储器上连续存储，这样会有几个问题：
 InnoDB 是使用页来作为管理存储空间的基本单位，也就是最多能保证 16KB 的连续存储空间，而随着表中记 录数量的增多，需要非常大的连续的存储空间才能把所有的目录项都放下，这对记录数量非常多的表是不现 实的。 我们时常会对记录进行增删，假设我们把 页28 中的记录都删除了，页28 也就没有存在的必要了，那意味 着 目录项2 也就没有存在的必要了，这就需要把 目录项2 后的目录项都向前移动一下，这种牵一发而动全身 InnoDB 中的索引方案 目录项记录 的 record_type 值是1， 而普通用户记录的 record_type 值是0 目录项记录 只有主键值和页的编号两个列， 而普通的用户记录的列是用户自己定义的，可能包含多很多列，另外还有 InnoDB 自己添加的隐藏列 只有在存储 目录项记录 的页中的主键值最小的 目录项记录 的 min_rec_mask 值为 1 ，其他别的记录的 min_rec_mask 值都是 0 虽然说 目录项记录 中只存储主键值和对应的页号， 比 用户记录 需要的存储空间小多了，但是不论怎么说一个页的大小只有 16KB ， 能存放的 目录项记录 也是有限的。，那如果表中的数据太多，以至于一个数据页不足以存放所有的 目录项记录 会新分配一个 目录项记录 的页。
 如图，我们生成了一个存储更高级目录项的 页33 ，这个页中的两条记录分别代表 页30 和 页32 ，如果 用户记录 的主键值在 (1, 320) 之间，则到 页30 中查找更详细的 目录项记录 ，如果主键值不小于 320 的话，就到 页32 中查找更详细的 目录项记录 。</description>
@@ -34,10 +34,10 @@ InnoDB 是使用页来作为管理存储空间的基本单位，也就是最多�
     
     <item>
       <title>索引</title>
-      <link>http://www.yrzs.tk/post/2022/7/13/</link>
+      <link>https://yrzs.github.io/post/2022/7/13/</link>
       <pubDate>Wed, 13 Jul 2022 16:02:42 +0800</pubDate>
       
-      <guid>http://www.yrzs.tk/post/2022/7/13/</guid>
+      <guid>https://yrzs.github.io/post/2022/7/13/</guid>
       <description>在InnoDB中 数据页 有七个组成部分,各个数据页可以组成一个双向链表， 而每个数据页中的记录会按照主键值从小到大的顺序组成一个 单向链表 ,每个数据页都会为存储在它里边儿的数据生成一个 页目录 ， 在通过主键查找某条记录的时候可以在页目录中使用 二分法 快速定位到对应的槽（slot）,然后遍历该slot对应分组中的记录即可快速找到指定的记录。
 没有索引的查找 在一个页中的查找 假设目前表中的记录比较少，所有的记录都可以被放到一个页中，在查找记录的时候可以根据搜索条件的不同分为两种情况：
 以主键为搜索条件 在 页目录 中使用 二分法 快速定位到对应的slot&amp;hellip;
@@ -53,10 +53,10 @@ InnoDB 是使用页来作为管理存储空间的基本单位，也就是最多�
     
     <item>
       <title>Mysql InnoDB 数据页</title>
-      <link>http://www.yrzs.tk/post/2022/7/12/mysql-innodb/</link>
+      <link>https://yrzs.github.io/post/2022/7/12/mysql-innodb/</link>
       <pubDate>Tue, 12 Jul 2022 15:40:41 +0800</pubDate>
       
-      <guid>http://www.yrzs.tk/post/2022/7/12/mysql-innodb/</guid>
+      <guid>https://yrzs.github.io/post/2022/7/12/mysql-innodb/</guid>
       <description>InnoDB为了不同的目的而设计了不同类型的页，我们把用于存放记录的页叫做 数据页 。
 一个数据页可以被大致划分为7个部分，分别是:
 File Header ，表示页的一些通用信息，占固定的38字节。 Page Header ，表示数据页专有的一些信息，占固定的56个字节。 Infimum + Supremum ，两个虚拟的伪记录，分别表示页中的最小和最大记录，占固定的 26 个字节。 User Records ：真实存储我们插入的记录的部分，大小不固定。 Free Space ：页中尚未使用的部分，大小不确定。 Page Directory ：页中的某些记录相对位置，也就是各个槽在页面中的地址偏移量，大小不固定，插 入的记录越多，这个部分占用的空间越多。 File Trailer ：用于检验页是否完整的部分，占用固定的8个字节。 前4个字节代表页的校验和 后4个字节代表页面被最后修改时对应的日志序列位置（LSN） 每个记录的头信息中都有一个 next_record 属性，从而使页中的所有记录串联成一个 单链表 。

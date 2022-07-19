@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <script type="application/javascript" src='http://www.yrzs.tk/js/theme-mode.js'></script>
-    <link rel="stylesheet" href='http://www.yrzs.tk/css/frameworks.min.css' />
-    <link rel="stylesheet" href='http://www.yrzs.tk/css/github.min.css' />
-    <link rel="stylesheet" href='http://www.yrzs.tk/css/github-style.css' />
-    <link rel="stylesheet" href='http://www.yrzs.tk/css/light.css' />
-    <link rel="stylesheet" href='http://www.yrzs.tk/css/dark.css' />
-    <link rel="stylesheet" href='http://www.yrzs.tk/css/syntax.css' />
+    <script type="application/javascript" src='https://yrzs.github.io/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='https://yrzs.github.io/css/frameworks.min.css' />
+    <link rel="stylesheet" href='https://yrzs.github.io/css/github.min.css' />
+    <link rel="stylesheet" href='https://yrzs.github.io/css/github-style.css' />
+    <link rel="stylesheet" href='https://yrzs.github.io/css/light.css' />
+    <link rel="stylesheet" href='https://yrzs.github.io/css/dark.css' />
+    <link rel="stylesheet" href='https://yrzs.github.io/css/syntax.css' />
     <title>Innodb Index - Yrzs&#39;s blog</title>
     
     <link rel="icon" type="image/x-icon" href='/images/github.png'>
@@ -22,9 +22,9 @@
 InnoDB 是使用页来作为管理存储空间的基本单位，也就是最多能保证 16KB 的连续存储空间，而随着表中记 录数量的增多，需要非常大的连续的存储空间才能把所有的目录项都放下，这对记录数量非常多的表是不现 实的。 我们时常会对记录进行增删，假设我们把 页28 中的记录都删除了，页28 也就没有存在的必要了，那意味 着 目录项2 也就没有存在的必要了，这就需要把 目录项2 后的目录项都向前移动一下，这种牵一发而动全身 InnoDB 中的索引方案 目录项记录 的 record_type 值是1， 而普通用户记录的 record_type 值是0 目录项记录 只有主键值和页的编号两个列， 而普通的用户记录的列是用户自己定义的，可能包含多很多列，另外还有 InnoDB 自己添加的隐藏列 只有在存储 目录项记录 的页中的主键值最小的 目录项记录 的 min_rec_mask 值为 1 ，其他别的记录的 min_rec_mask 值都是 0 虽然说 目录项记录 中只存储主键值和对应的页号， 比 用户记录 需要的存储空间小多了，但是不论怎么说一个页的大小只有 16KB ， 能存放的 目录项记录 也是有限的。，那如果表中的数据太多，以至于一个数据页不足以存放所有的 目录项记录 会新分配一个 目录项记录 的页。
 如图，我们生成了一个存储更高级目录项的 页33 ，这个页中的两条记录分别代表 页30 和 页32 ，如果 用户记录 的主键值在 (1, 320) 之间，则到 页30 中查找更详细的 目录项记录 ，如果主键值不小于 320 的话，就到 页32 中查找更详细的 目录项记录 。" />
 <meta name="keywords"
-  content='blog, google analytics' />
+  content='blog,yrzs,study,knowledgebase' />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="http://www.yrzs.tk/post/2022/7/14/innodb-index/" />
+<link rel="canonical" href="https://yrzs.github.io/post/2022/7/14/innodb-index/" />
 
 
 <meta name="twitter:card" content="summary" />
@@ -33,10 +33,10 @@ InnoDB 是使用页来作为管理存储空间的基本单位，也就是最多�
   content="之前的 简单索引方案 假设所有的目录项都可以在物理存储器上连续存储，这样会有几个问题：
 InnoDB 是使用页来作为管理存储空间的基本单位，也就是最多能保证 16KB 的连续存储空间，而随着表中记 录数量的增多，需要非常大的连续的存储空间才能把所有的目录项都放下，这对记录数量非常多的表是不现 实的。 我们时常会对记录进行增删，假设我们把 页28 中的记录都删除了，页28 也就没有存在的必要了，那意味 着 目录项2 也就没有存在的必要了，这就需要把 目录项2 后的目录项都向前移动一下，这种牵一发而动全身 InnoDB 中的索引方案 目录项记录 的 record_type 值是1， 而普通用户记录的 record_type 值是0 目录项记录 只有主键值和页的编号两个列， 而普通的用户记录的列是用户自己定义的，可能包含多很多列，另外还有 InnoDB 自己添加的隐藏列 只有在存储 目录项记录 的页中的主键值最小的 目录项记录 的 min_rec_mask 值为 1 ，其他别的记录的 min_rec_mask 值都是 0 虽然说 目录项记录 中只存储主键值和对应的页号， 比 用户记录 需要的存储空间小多了，但是不论怎么说一个页的大小只有 16KB ， 能存放的 目录项记录 也是有限的。，那如果表中的数据太多，以至于一个数据页不足以存放所有的 目录项记录 会新分配一个 目录项记录 的页。
 如图，我们生成了一个存储更高级目录项的 页33 ，这个页中的两条记录分别代表 页30 和 页32 ，如果 用户记录 的主键值在 (1, 320) 之间，则到 页30 中查找更详细的 目录项记录 ，如果主键值不小于 320 的话，就到 页32 中查找更详细的 目录项记录 。" />
-<meta name="twitter:site" content="http://www.yrzs.tk" />
+<meta name="twitter:site" content="https://yrzs.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
-  content="http://www.yrzs.tk">
+  content="https://yrzs.github.io/">
 
 
 <meta property="og:type" content="article" />
@@ -45,10 +45,10 @@ InnoDB 是使用页来作为管理存储空间的基本单位，也就是最多�
   content="之前的 简单索引方案 假设所有的目录项都可以在物理存储器上连续存储，这样会有几个问题：
 InnoDB 是使用页来作为管理存储空间的基本单位，也就是最多能保证 16KB 的连续存储空间，而随着表中记 录数量的增多，需要非常大的连续的存储空间才能把所有的目录项都放下，这对记录数量非常多的表是不现 实的。 我们时常会对记录进行增删，假设我们把 页28 中的记录都删除了，页28 也就没有存在的必要了，那意味 着 目录项2 也就没有存在的必要了，这就需要把 目录项2 后的目录项都向前移动一下，这种牵一发而动全身 InnoDB 中的索引方案 目录项记录 的 record_type 值是1， 而普通用户记录的 record_type 值是0 目录项记录 只有主键值和页的编号两个列， 而普通的用户记录的列是用户自己定义的，可能包含多很多列，另外还有 InnoDB 自己添加的隐藏列 只有在存储 目录项记录 的页中的主键值最小的 目录项记录 的 min_rec_mask 值为 1 ，其他别的记录的 min_rec_mask 值都是 0 虽然说 目录项记录 中只存储主键值和对应的页号， 比 用户记录 需要的存储空间小多了，但是不论怎么说一个页的大小只有 16KB ， 能存放的 目录项记录 也是有限的。，那如果表中的数据太多，以至于一个数据页不足以存放所有的 目录项记录 会新分配一个 目录项记录 的页。
 如图，我们生成了一个存储更高级目录项的 页33 ，这个页中的两条记录分别代表 页30 和 页32 ，如果 用户记录 的主键值在 (1, 320) 之间，则到 页30 中查找更详细的 目录项记录 ，如果主键值不小于 320 的话，就到 页32 中查找更详细的 目录项记录 。" />
-<meta property="og:url" content="http://www.yrzs.tk/post/2022/7/14/innodb-index/" />
+<meta property="og:url" content="https://yrzs.github.io/post/2022/7/14/innodb-index/" />
 <meta property="og:site_name" content="Innodb Index" />
 <meta property="og:image"
-  content="http://www.yrzs.tk">
+  content="https://yrzs.github.io/">
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
 
@@ -69,7 +69,7 @@ InnoDB 是使用页来作为管理存储空间的基本单位，也就是最多�
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
     <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
-      <a class="Header-link" href="http://www.yrzs.tk">
+      <a class="Header-link" href="https://yrzs.github.io/">
         <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
           <path fill-rule="evenodd"
             d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
@@ -99,7 +99,7 @@ InnoDB 是使用页来作为管理存储空间的基本单位，也就是最多�
               <input type="text"
                 class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
                 name="q" value="" placeholder="Search" autocomplete="off">
-              <input type="hidden" name="q" value="site:http://www.yrzs.tk">
+              <input type="hidden" name="q" value="site:https://yrzs.github.io/">
             </label>
           </form>
         </div>
@@ -107,7 +107,7 @@ InnoDB 是使用页来作为管理存储空间的基本单位，也就是最多�
     </div>
 
     <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
-      <a class="Header-link " href="http://www.yrzs.tk">
+      <a class="Header-link " href="https://yrzs.github.io/">
         <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
           width="32">
           <path fill-rule="evenodd"
@@ -137,17 +137,17 @@ InnoDB 是使用页来作为管理存储空间的基本单位，也就是最多�
           <div class="flex-auto min-width-0 width-fit mr-3">
             <div class="d-flex">
               <div class="d-none d-md-block">
-                <a class="avatar mr-2 flex-shrink-0" href="http://www.yrzs.tk">
+                <a class="avatar mr-2 flex-shrink-0" href="https://yrzs.github.io/">
                   <img class=" avatar-user"
-                    src="http://www.yrzs.tk/images/avatar.png"
+                    src="https://yrzs.github.io/images/avatar.png"
                     width="32" height="32"></a>
               </div>
               <div class="d-flex flex-column">
                 <h1 class="break-word f3 text-normal mb-md-0 mb-1">
                   <span class="author">
-                    <a href="http://www.yrzs.tk">Yrzs</a></span><span
+                    <a href="https://yrzs.github.io/">Yrzs</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="http://www.yrzs.tk/post/2022/7/14/innodb-index/">Innodb Index</a></strong>
+                      href="https://yrzs.github.io/post/2022/7/14/innodb-index/">Innodb Index</a></strong>
                 </h1>
                 <div class="note m-0">
                   Created <relative-time datetime="Thu, 14 Jul 2022 11:54:52 &#43;0800"
@@ -296,12 +296,12 @@ InnoDB 是使用页来作为管理存储空间的基本单位，也就是最多�
     </div>
   </main>
 </div>
-<script type="application/javascript" src='http://www.yrzs.tk/js/toc.js'></script>
-<link rel="stylesheet" href='http://www.yrzs.tk/css/toc.css' />
+<script type="application/javascript" src='https://yrzs.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://yrzs.github.io/css/toc.css' />
 
 <div id="gitalk-container" class="gitalk-container"></div>
-<link rel="stylesheet" href='http://www.yrzs.tk/css/gitalk.css'>
-<script src='http://www.yrzs.tk/js/gitalk.min.js'></script>
+<link rel="stylesheet" href='https://yrzs.github.io/css/gitalk.css'>
+<script src='https://yrzs.github.io/js/gitalk.min.js'></script>
 <script>
   const gitalk = new Gitalk({
     clientID: '',
@@ -321,7 +321,7 @@ InnoDB 是使用页来作为管理存储空间的基本单位，也就是最多�
   <div class="footer container-xl width-full p-responsive">
   <div
     class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
-    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="http://www.yrzs.tk">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://yrzs.github.io/">
       <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
         <path fill-rule="evenodd"
           d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
@@ -342,7 +342,7 @@ InnoDB 是使用页来作为管理存储空间的基本单位，也就是最多�
 </div>
 </body>
 
-<script type="application/javascript" src="http://www.yrzs.tk/js/github-style.js"></script>
+<script type="application/javascript" src="https://yrzs.github.io/js/github-style.js"></script>
 
 
 
